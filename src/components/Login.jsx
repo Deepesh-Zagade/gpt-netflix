@@ -1,17 +1,86 @@
 // Package Imports
 import React from 'react'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth'
 
 // Project Imports
 import Header from './Header'
-import { LOGIN_BACKGROUND } from '../utils/CdnUrls'
+import { LOGIN_BACKGROUND, USER_IMG } from '../utils/CdnUrls'
 import { useState } from 'react'
+import validateSigninForm from '../utils/validateSigninForm'
+import { useRef } from 'react'
+import { auth } from '../utils/fireBase'
+import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { addUser } from '../utils/reduxStateManagement/slices/userSlice'
 
 const Login = () => {
 
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+
     const [isSigninForm, setIsSigninForm] = useState(true)
+    const [errorMessage, setErrorMessage] = useState(null)
+
+    const email = useRef(null)
+    const fullName = useRef(null)
+    const password = useRef(null)
 
     const formToggler = () => {
         setIsSigninForm(!isSigninForm)
+    }
+
+    const formSubmitHandler = () => {
+        // Validation
+
+        const fullNameValue = isSigninForm ? undefined : fullName?.current?.value
+        const validationMessage = validateSigninForm(email.current.value, password.current.value, fullNameValue)
+        setErrorMessage(validationMessage)
+
+        if (validationMessage) return
+
+        // Authentication
+
+        if (!isSigninForm) {
+            // Sign Up Logic
+            createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+                .then((userCredential) => {
+                    // Signed up 
+                    const user = userCredential.user;
+                    // Updating Profile
+                    updateProfile(user, {
+                        displayName: fullNameValue, photoURL: USER_IMG
+                    }).then(() => {
+                        // Profile updated!
+                        const { uid, email, displayName, photoURL } = auth.currentUser;
+                        dispatch(addUser(
+                            { uid, email, displayName, photoURL }
+                        ))
+                        navigate('/browse')
+                    }).catch((error) => {
+                        // An error occurred
+                        setErrorMessage(error.message)
+                    });
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMessage(errorCode + '-' + errorMessage)
+                });
+        } else {
+            // Sign In Logic
+            signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+                .then((userCredential) => {
+                    // Signed in 
+                    const user = userCredential.user;
+                    // console.log("signIn:::user:::", user)
+                    navigate('/browse')
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMessage(errorCode + '-' + errorMessage)
+                });
+        }
     }
 
     return (
@@ -20,27 +89,37 @@ const Login = () => {
             <div className='absolute'>
                 <img className='' src={LOGIN_BACKGROUND} alt="background" />
             </div>
-            <form className='bg-black opacity-90 px-16 py-12 text-white rounded-lg w-3/12 mx-auto my-40 absolute top-0 right-0 left-0'>
+            <form onSubmit={(e) => e.preventDefault()} className='bg-black opacity-90 px-16 py-12 text-white rounded-lg w-3/12 mx-auto my-40 absolute top-0 right-0 left-0'>
                 <div className='mt-4'>
                     <h1 className='pb-3  text-3xl font-bold'>Sign {isSigninForm ? 'In' : 'Up'}</h1>
                 </div>
                 {!isSigninForm &&
                     <input
-                        className='mt-4 p-4 placeholder-stone-300 rounded-sm w-full bg-stone-900 border border-stone-300'
                         type='text'
+                        ref={fullName}
                         placeholder='Full Name'
+                        className='mt-4 p-4 placeholder-stone-300 rounded-sm w-full bg-stone-900 border border-stone-300'
                     />
                 }
                 <input
-                    className='mt-4 p-4 placeholder-stone-300 rounded-sm w-full bg-stone-900 border border-stone-300'
                     type='text'
+                    ref={email}
                     placeholder='Email'
+                    className='mt-4 p-4 placeholder-stone-300 rounded-sm w-full bg-stone-900 border border-stone-300'
                 />
-                <input className='mt-4 p-4 placeholder-stone-300 rounded-sm w-full bg-stone-900 border border-stone-300'
+                <input
+                    ref={password}
                     type='password'
                     placeholder='Password'
+                    className='mt-4 p-4 placeholder-stone-300 rounded-sm w-full bg-stone-900 border border-stone-300'
                 />
-                <button className='my-5 px-4 py-2 rounded-sm w-full cursor-pointer bg-red-700 '>
+                {errorMessage &&
+                    <p className='mt-2 font-bold text-red-600'>{errorMessage}</p>
+                }
+                <button
+                    onClick={formSubmitHandler}
+                    className='my-5 px-4 py-2 rounded-sm w-full cursor-pointer bg-red-700 '
+                >
                     Sign {isSigninForm ? 'In' : 'Up'}
                 </button>
                 <div>
