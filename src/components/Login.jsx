@@ -1,21 +1,17 @@
 // Package Imports
-import React from 'react'
+import { useDispatch } from 'react-redux'
+import React, { useState, useRef } from 'react'
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile } from 'firebase/auth'
 
 // Project Imports
 import Header from './Header'
-import { LOGIN_BACKGROUND, USER_IMG } from '../utils/CdnUrls'
-import { useState } from 'react'
-import validateSigninForm from '../utils/validateSigninForm'
-import { useRef } from 'react'
 import { auth } from '../utils/fireBase'
-import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import validateSigninForm from '../utils/validateSigninForm'
+import { LOGIN_BACKGROUND, USER_IMG } from '../utils/CdnUrls'
 import { addUser } from '../utils/reduxStateManagement/slices/userSlice'
 
 const Login = () => {
 
-    const navigate = useNavigate()
     const dispatch = useDispatch()
 
     const [isSigninForm, setIsSigninForm] = useState(true)
@@ -55,7 +51,6 @@ const Login = () => {
                         dispatch(addUser(
                             { uid, email, displayName, photoURL }
                         ))
-                        navigate('/browse')
                     }).catch((error) => {
                         // An error occurred
                         setErrorMessage(error.message)
@@ -73,7 +68,6 @@ const Login = () => {
                     // Signed in 
                     const user = userCredential.user;
                     // console.log("signIn:::user:::", user)
-                    navigate('/browse')
                 })
                 .catch((error) => {
                     const errorCode = error.code;

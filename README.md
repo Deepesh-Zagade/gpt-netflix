@@ -14,6 +14,7 @@
 - Created Redux store with user slice
 - Implemented signout
 - updated profile
+- Bug Fix ::: Authenticated Routing ::: if user is not login redirect to /login , and if logged in redirect to /browse
 
 # Features
 

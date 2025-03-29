@@ -1,10 +1,13 @@
-import { signOut } from 'firebase/auth';
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+// Package Imports
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+
+// Project Imports
 import { LOGO } from '../utils/CdnUrls'
 import { auth } from '../utils/fireBase';
-import { removeUser } from '../utils/reduxStateManagement/slices/userSlice';
+import { addUser, removeUser } from '../utils/reduxStateManagement/slices/userSlice';
 
 const Header = () => {
 
@@ -17,12 +20,26 @@ const Header = () => {
         signOut(auth).then(() => {
             // Sign-out successful.
             dispatch(removeUser())
-            navigate('/')
         }).catch((error) => {
             // An error happened.
             navigate('/error')
         });
     }
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                const { uid, email, displayName, photoURL } = user;
+                dispatch(addUser(
+                    { uid, email, displayName, photoURL }
+                ))
+                navigate('/browse')
+            } else {
+                dispatch(removeUser())
+                navigate('/')
+            }
+        });
+    }, [])
 
     return (
         <div className='px-40 py-5 absolute bg-gradient-to-b from-black z-10 flex'>
