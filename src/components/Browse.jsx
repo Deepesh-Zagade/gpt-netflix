@@ -1,7 +1,13 @@
-import React from 'react'
+// Package Imports
+
+// Project Imports
 import Header from './Header'
+import useNowPlayingMovies from '../utils/hooks/useNowPlayingMovies'
 
 const Browse = () => {
+
+  useNowPlayingMovies()
+
   return (
     <>
       <Header />

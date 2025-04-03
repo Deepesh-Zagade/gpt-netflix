@@ -27,7 +27,7 @@ const Header = () => {
     }
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 const { uid, email, displayName, photoURL } = user;
                 dispatch(addUser(
@@ -39,6 +39,7 @@ const Header = () => {
                 navigate('/')
             }
         });
+        return () => unsubscribe()
     }, [])
 
     return (
