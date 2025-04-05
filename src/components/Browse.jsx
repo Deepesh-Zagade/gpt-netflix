@@ -3,6 +3,8 @@
 // Project Imports
 import Header from './Header'
 import useNowPlayingMovies from '../utils/hooks/useNowPlayingMovies'
+import PromoMovieContainer from './promo-movie/PromoMovieContainer'
+import MovieListsContainer from './movie-geners/MovieListsContainer'
 
 const Browse = () => {
 
@@ -11,7 +13,8 @@ const Browse = () => {
   return (
     <>
       <Header />
-      <div className='absolute mt-20'>Browse</div>
+      <PromoMovieContainer />
+      <MovieListsContainer />
     </>
   )
 }
