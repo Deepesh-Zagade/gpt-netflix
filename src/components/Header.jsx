@@ -43,7 +43,7 @@ const Header = () => {
     }, [])
 
     return (
-        <div className='px-40 py-5 absolute bg-gradient-to-b from-black z-10 flex'>
+        <div className='px-40 py-5 absolute bg-gradient-to-b from-black/70 z-10 flex'>
             <div className='rounded-full'>
                 <img className='w-[12%]' src={LOGO} alt="logo" />
             </div>
