@@ -5,7 +5,9 @@ import appStore from "./utils/reduxStateManagement/appStore"
 function App() {
   return (
     <Provider store={appStore}>
-      <Body />
+      <div className="overflow-hidden">
+        <Body />
+      </div>
     </Provider>
   )
 }

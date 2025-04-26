@@ -10,7 +10,7 @@ const PromoMovieContainer = () => {
     const movies = useSelector(store => store.movie?.nowPlayingMovies)
     if (!movies) return;
 
-    const { original_title, overview, id } = movies[0]
+    const { original_title, overview, id } = movies[6]
 
     return (
         <>

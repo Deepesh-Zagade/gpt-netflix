@@ -15,6 +15,16 @@
 - Implemented signout
 - updated profile
 - Bug Fix ::: Authenticated Routing ::: if user is not login redirect to /login , and if logged in redirect to /browse
+- register TMDB API and created acces token from thier website
+- Get Data from Now playing movies list api
+- custom hook for now playing movies
+- creted movie slice
+- updated store with movies data
+- planning for Movielist container and PromoTrailer container
+- fetch data for trailer video 
+- updated store with trailer video data
+- embeded youtube video with iframe and made it autoplay and mute
+- adjusted CSS for PromoTrailer 
 
 # Features
 

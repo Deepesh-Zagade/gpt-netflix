@@ -43,16 +43,14 @@ const Header = () => {
     }, [])
 
     return (
-        <div className='px-40 py-5 absolute bg-gradient-to-b from-black/70 z-10 flex'>
-            <div className='rounded-full'>
-                <img className='w-[12%]' src={LOGO} alt="logo" />
-            </div>
+        <div className='px-6 absolute bg-gradient-to-b from-black/70 z-10 flex justify-between'>
+            <img className='w-[12%]' src={LOGO} alt="logo" />
             {user &&
-                <div className='flex p-4'>
+                <div className='flex gap-5 items-center'>
                     <img className='w-10 h-10' src={user.photoURL} />
                     <button
                         onClick={handleSignOut}
-                        className='mx-5 p-2 cursor-pointer bg-red-600 text-white font-bold rounded-sm'
+                        className='px-4 py-2 cursor-pointer bg-red-600 text-white font-bold rounded-sm'
                     >
                         Sign Out
                     </button>
