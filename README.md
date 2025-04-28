@@ -29,6 +29,10 @@
 - made movie lists and movie card component and beutified CSS
 - created separate page for GPT search
 - made GPT search page Multi Lingual
+- made api call to Gemini AI with prompt text
+- using Gemiini ai recommendation response, made TMDB api call to get movie details
+- stored recommended movie details in redux store
+- mapped recommended movielist on search page 
 
 # Features
 

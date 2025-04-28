@@ -4,12 +4,12 @@
 import MovieCard from './MovieCard'
 
 const MovieList = ({ title, data }) => {
+    if (!data) return
     return (
         <div className='px-6'>
             <h1 className='p-4 text-3xl text-white'>{title}</h1>
             <div className='flex overflow-x-scroll scrollbar-hide'>
                 <div className='flex'>
-
                     {
                         data?.map((item, index) => (
                             <MovieCard key={item.id} details={item} />

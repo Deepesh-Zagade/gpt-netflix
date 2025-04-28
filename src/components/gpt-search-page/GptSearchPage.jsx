@@ -1,11 +1,14 @@
+//Package Imports
+
+//Project Imports
+import GptSearchBar from "./GptSearchBar";
 import { LOGIN_BACKGROUND } from "../../utils/CdnUrls";
 import GptRecommendedContent from "./GptRecommendedContent";
-import GptSearchBar from "./GptSearchBar";
 
 const GptSearchPage = () => {
     return (
         <div>
-            <div className='absolute -z-10'>
+            <div className='fixed -z-10'>
                 <img className='' src={LOGIN_BACKGROUND} alt="background" />
             </div>
             <GptSearchBar />
