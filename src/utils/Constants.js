@@ -5,3 +5,22 @@ export const API_OPTIONS = {
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5NmM3MjU4NTQxM2VlNjY1NWYyNWViYjBiNmI2YzkxNSIsIm5iZiI6MTc0MzIzODQ4OS4yNjksInN1YiI6IjY3ZTdiNTU5NmIzNjdkNDY5NTY3YjIxNCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.vfr4reBLDPg6SVyRmC6Ybgz_Kfty5VO-WJrSGHNYelU'
     }
 };
+
+export const languageOptions = [
+    {
+        code: 'en',
+        name: 'English'
+    },
+    {
+        code: 'hi',
+        name: 'Hindi',
+    },
+    {
+        code: 'mr',
+        name: 'Marathi',
+    },
+    {
+        code: 'es',
+        name: 'Spanish'
+    }
+]

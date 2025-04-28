@@ -25,6 +25,10 @@
 - updated store with trailer video data
 - embeded youtube video with iframe and made it autoplay and mute
 - adjusted CSS for PromoTrailer 
+- added Movie gnre list (popular movies, top rated movies)
+- made movie lists and movie card component and beutified CSS
+- created separate page for GPT search
+- made GPT search page Multi Lingual
 
 # Features
 
