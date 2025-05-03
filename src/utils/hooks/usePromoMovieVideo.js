@@ -1,6 +1,6 @@
 // Package Imports
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 // Project Imports
 import { API_OPTIONS } from "../Constants"
@@ -9,6 +9,7 @@ import { addPromoMovieTrailer } from "../reduxStateManagement/slices/movieSlice"
 const usePromoMovieVideo = (movieId) => {
 
     const dispatch = useDispatch()
+    const trailer = useSelector(store => store.movie.promoMovieTrailer)
 
     const getMovieTrailer = async () => {
         // Api Call
@@ -24,7 +25,7 @@ const usePromoMovieVideo = (movieId) => {
     }
 
     useEffect(() => {
-        getMovieTrailer()
+        !trailer && getMovieTrailer()
     }, [])
 }
 

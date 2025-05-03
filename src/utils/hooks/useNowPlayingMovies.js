@@ -1,6 +1,6 @@
 // Package Imports
 import { useEffect } from "react"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 
 // Project Imports
 import { API_OPTIONS } from "../Constants"
@@ -9,6 +9,7 @@ import { addNowPlayingMovies } from "../reduxStateManagement/slices/movieSlice"
 
 const useNowPlayingMovies = () => {
     const dispatch = useDispatch()
+    const nowPlayingMoviesList = useSelector(store => store.movie.nowPlayingMovies)
 
     const nowPlayingMovies = async () => {
         const data = await fetch(NOW_PLAYING_MOVIES, API_OPTIONS)
@@ -17,7 +18,7 @@ const useNowPlayingMovies = () => {
     }
 
     useEffect(() => {
-        nowPlayingMovies()
+        !nowPlayingMoviesList && nowPlayingMovies()
     }, [])
 }
 
