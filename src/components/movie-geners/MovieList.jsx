@@ -6,8 +6,8 @@ import MovieCard from './MovieCard'
 const MovieList = ({ title, data }) => {
     if (!data) return
     return (
-        <div className='px-6'>
-            <h1 className='p-4 text-3xl text-white'>{title}</h1>
+        <div className='pb-3 px-3 md:px-6'>
+            <h1 className='p-2 md:p-4 text-lg md:text-3xl font-bold text-white'>{title}</h1>
             <div className='flex overflow-x-scroll scrollbar-hide'>
                 <div className='flex'>
                     {

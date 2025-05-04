@@ -53,14 +53,14 @@ const Header = () => {
     }, [])
 
     return (
-        <div className='px-6 absolute bg-gradient-to-b from-black/70 z-10 flex justify-between'>
-            <img className='w-[12%]' src={LOGO} alt="logo" />
+        <div className='px-6 absolute bg-gradient-to-b from-black/70 z-10 flex flex-col md:flex-row justify-between'>
+            <img className='m-auto md:m-0 w-[30%] md:w-[12%]' src={LOGO} alt="logo" />
             {user &&
-                <div className='flex gap-5 items-center'>
+                <div className='flex gap-5 items-center justify-center'>
                     {showGptPage &&
                         <select
                             name="language"
-                            className='px-4 py-2 rounded-sm bg-red-700 text-white font-bold'
+                            className='px-2 md:px-4 py-1 md:py-2 text-xs md:text-lg rounded-sm bg-red-700 text-white font-bold'
                             onChange={(e) => dispatch(setLanguage(e.target.value))}
                         >
                             {languageOptions.map((language, index) => {
@@ -73,13 +73,13 @@ const Header = () => {
                         </select>
                     }
                     <button
-                        className='m-2 mr-8 p-2 bg-gray-200 hover:bg-gray-400 hover:text-red-900 cursor-pointer rounded-sm text-red-800 font-bold'
+                        className='m-2 md:mr-8 text-xs md:text-lg p-1 md:p-2 bg-gray-200 hover:bg-gray-400 hover:text-red-900 cursor-pointer rounded-sm text-red-800 font-bold'
                         onClick={handleGptClick}
                     >{showGptPage ? lang[language].homePage : 'GPT Search'}</button>
-                    <img className='w-10 h-10' src={user.photoURL} />
+                    <img className='w-5 md:w-10 h-5 md:h-10' src={user.photoURL} />
                     <button
                         onClick={handleSignOut}
-                        className='px-4 py-2 cursor-pointer bg-red-700 text-white font-bold rounded-sm'
+                        className='px-2 md:px-4 py-1 md:py-2 text-xs md:text-lg cursor-pointer bg-red-700 text-white font-bold rounded-sm'
                     >
                         Sign Out
                     </button>
