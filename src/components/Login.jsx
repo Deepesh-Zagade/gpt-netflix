@@ -122,7 +122,7 @@ const Login = () => {
                             className='text-stone-300 font-bold cursor-pointer'
                             onClick={formToggler}
                         >
-                            Sign {isSigninForm ? 'Up' : 'In'} now.
+                            Sign {isSigninForm ? 'Up' : 'in'} now.
                         </span>
                     </p>
                 </div>
